@@ -1,0 +1,21 @@
+name: Build docker image
+
+on:
+  workflow_dispatch:
+    inputs:
+      caddy_version:
+        description: Caddy version (e.g. 2.11 or latest)
+        required: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          docker build \
+            --build-arg CADDY_VERSION="$VERSION" \
+            -t ghcr.io/burtek/caddy-cloudflare:$VERSION .
+      - run: |
+          docker run --rm \
+            ghcr.io/burtek/caddy-cloudflare:$VERSION \
+            caddy list-modules
