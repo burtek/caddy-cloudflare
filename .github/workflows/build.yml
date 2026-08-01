@@ -4,8 +4,9 @@ on:
   workflow_dispatch:
     inputs:
       caddy_version:
-        description: Caddy version (e.g. 2.11 or latest)
+        description: "Caddy version (e.g. 2, 2.11 or 2.11.4)"
         required: true
+        type: string
 
 jobs:
   build:
